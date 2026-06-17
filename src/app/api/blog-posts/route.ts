@@ -8,7 +8,7 @@ export async function GET() {
 
 		const { data, error } = await client
 			.from('blog_posts')
-			.select('id, title, summary, created_at')
+			.select('id, title, summary, content, created_at')
 			.order('created_at', { ascending: false });
 
 		if (error) {

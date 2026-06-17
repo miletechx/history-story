@@ -8,7 +8,7 @@ interface BlogPost {
 	id: number;
 	title: string;
 	summary: string;
-	content: string;
+	content?: string;
 	created_at: string;
 }
 
@@ -22,7 +22,7 @@ export default function BlogPage() {
 				const res = await fetch('/api/blog-posts');
 				if (!res.ok) throw new Error('获取失败');
 				const data = await res.json();
-				setPosts(data);
+				setPosts(Array.isArray(data) ? data : []);
 			} catch (error) {
 				console.error('获取文章列表失败:', error);
 			} finally {
@@ -40,9 +40,10 @@ export default function BlogPage() {
 		});
 	};
 
-	const calcReadTime = (content: string) => {
+	const calcReadTime = (content?: string) => {
+		if (!content) return '约5分钟';
 		const words = content.length;
-		const minutes = Math.ceil(words / 500);
+		const minutes = Math.max(1, Math.ceil(words / 500));
 		return `${minutes}分钟`;
 	};
 
