@@ -49,7 +49,7 @@ export function UserMenu() {
 	};
 
 	if (loading) {
-		return <div className="w-20 h-9 animate-pulse bg-gray-200 rounded-lg" />;
+		return <div className="h-9 w-24 animate-pulse rounded-full bg-gray-200" />;
 	}
 
 	if (user) {
@@ -106,16 +106,16 @@ export function UserMenu() {
 	}
 
 	return (
-		<div className="flex items-center gap-2">
+		<div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
 			<Link href="/login">
-				<Button variant="ghost" className="text-gray-600 hover:text-gray-900">
-					<LogIn className="w-4 h-4 mr-1" />
+				<Button variant="ghost" size="sm" className="h-9 rounded-full px-2.5 text-gray-600 hover:text-gray-900 sm:px-4">
+					<LogIn className="mr-1 h-4 w-4" />
 					登录
 				</Button>
 			</Link>
 			<Link href="/register">
-				<Button className="bg-amber-700 hover:bg-amber-800 text-white">
-					<UserPlus className="w-4 h-4 mr-1" />
+				<Button size="sm" className="h-9 rounded-full bg-amber-700 px-3 text-white shadow-sm hover:bg-amber-800 sm:px-4">
+					<UserPlus className="mr-1 h-4 w-4" />
 					注册
 				</Button>
 			</Link>

@@ -141,29 +141,29 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo.png" alt="历史故事会" width={32} height={32} className="rounded-lg" />
-            <span className="text-xl font-semibold text-gray-900">历史故事会</span>
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-gray-100/80 bg-white/85 backdrop-blur-2xl supports-[backdrop-filter]:bg-white/70">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6">
+          <Link href="/" className="flex min-w-0 items-center gap-2.5">
+            <Image src="/logo.png" alt="历史故事会" width={32} height={32} className="h-8 w-8 shrink-0 rounded-xl shadow-sm" />
+            <span className="truncate whitespace-nowrap text-base font-semibold tracking-tight text-gray-950 sm:text-xl">历史故事会</span>
           </Link>
-          <nav className="flex items-center gap-6">
-            <Link href="/history" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+          <nav className="hidden items-center gap-6 md:flex">
+            <Link href="/history" className="text-sm text-gray-600 transition-colors hover:text-gray-900">
               聆听历史
             </Link>
-            <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/blog" className="text-sm text-gray-600 transition-colors hover:text-gray-900">
               精彩故事角
             </Link>
-            <Link href="/settings" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/settings" className="text-sm text-gray-600 transition-colors hover:text-gray-900">
               设置
             </Link>
-            <UserMenu />
           </nav>
+          <UserMenu />
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+      <section className="relative flex min-h-screen items-start justify-center overflow-hidden pt-20 sm:items-center sm:pt-16">
         <div className="absolute inset-0 z-0">
           <Image
             src="/hero-bg.jpg"
@@ -175,45 +175,45 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white" />
         </div>
         
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <div className="mb-8">
+        <div className="relative z-10 mx-auto max-w-4xl px-5 text-center sm:px-6">
+          <div className="mb-5 sm:mb-8">
             <Image 
               src="/app-icon.png" 
               alt="历史故事会" 
               width={120} 
               height={120} 
-              className="mx-auto rounded-3xl shadow-2xl"
+              className="mx-auto h-20 w-20 rounded-[1.7rem] shadow-[0_18px_45px_rgba(180,83,9,0.22)] sm:h-[120px] sm:w-[120px] sm:rounded-3xl"
             />
           </div>
           
-          <h1 className="relative inline-block text-6xl md:text-7xl font-bold mb-6 tracking-tight">
-            <span className="absolute inset-0 -m-4 rounded-3xl bg-white/30 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.15)]" />
+          <h1 className="relative mb-4 inline-block text-[3.25rem] font-bold leading-none tracking-tight sm:mb-6 sm:text-6xl md:text-7xl">
+            <span className="absolute inset-0 -m-2 rounded-[1.6rem] border border-white/50 bg-white/45 shadow-[0_14px_45px_rgba(31,38,135,0.12)] backdrop-blur-xl sm:-m-4 sm:rounded-3xl" />
             <span className="relative bg-gradient-to-b from-gray-900 via-gray-700 to-gray-500 bg-clip-text text-transparent drop-shadow-sm">
               历史故事会
             </span>
           </h1>
           
-          <p className="text-2xl md:text-3xl text-gray-600 mb-8 font-light">
+          <p className="mb-5 text-xl font-light text-gray-600 sm:mb-8 sm:text-2xl md:text-3xl">
             AI 为你讲述每一个历史瞬间
           </p>
           
-          <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
-            想了解赤壁之战、丝绸之路？输入关键词，AI 实时生成专属故事。<br />
+          <p className="mx-auto mb-9 max-w-2xl text-[15px] leading-7 text-gray-500 sm:mb-12 sm:text-lg">
+            想了解赤壁之战、丝绸之路？输入关键词，AI 实时生成专属故事。<br className="hidden sm:block" />
             文字、配音、配图，三位一体的沉浸体验。
           </p>
 
           {/* Age Selector */}
-          <div className="mb-8">
-            <p className="text-sm text-gray-500 mb-4">选择你的年龄段</p>
-            <div className="flex flex-wrap justify-center gap-3">
+          <div className="mb-7 sm:mb-8">
+            <p className="mb-3 text-sm text-gray-500 sm:mb-4">选择你的年龄段</p>
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center">
               {ageGroups.map((ag) => (
                 <button
                   key={ag.id}
                   onClick={() => setAgeGroup(ag.id as AgeGroup)}
-                  className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
+                  className={`rounded-2xl px-4 py-3 text-sm font-medium transition-all sm:rounded-full sm:px-6 ${
                     ageGroup === ag.id
-                      ? 'bg-gray-900 text-white shadow-lg scale-105'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-gray-950 text-white shadow-[0_12px_28px_rgba(15,23,42,0.22)] sm:scale-105'
+                      : 'bg-gray-100/80 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
                   {ag.label} · {ag.desc}
@@ -223,14 +223,14 @@ export default function HomePage() {
           </div>
 
           {/* Search Bar */}
-          <div className="max-w-2xl mx-auto">
+          <div className="mx-auto max-w-2xl">
             <div className="relative">
-              <div className={`relative overflow-hidden rounded-3xl border bg-white shadow-sm transition-all duration-300 ${
+              <div className={`relative overflow-hidden rounded-[1.75rem] border bg-white/95 shadow-[0_12px_35px_rgba(15,23,42,0.08)] transition-all duration-300 sm:rounded-3xl ${
                 searchFocused
                   ? 'border-gray-900 shadow-[0_18px_60px_rgba(15,23,42,0.16)] ring-4 ring-gray-900/5'
                   : 'border-gray-200 hover:shadow-md'
               }`}>
-                <div className="flex items-center gap-3 px-6 py-4">
+                <div className="flex items-center gap-2 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
                   <div className="relative h-5 w-5 shrink-0 overflow-hidden">
                     <Search className={`absolute h-5 w-5 text-gray-400 transition-all duration-300 ${searchQuery ? 'translate-y-5 opacity-0' : 'translate-y-0 opacity-100'}`} />
                     <Send className={`absolute h-5 w-5 text-gray-500 transition-all duration-300 ${searchQuery ? 'translate-y-0 opacity-100' : '-translate-y-5 opacity-0'}`} />
@@ -242,12 +242,12 @@ export default function HomePage() {
                     onKeyDown={handleKeyDown}
                     onFocus={() => setSearchFocused(true)}
                     onBlur={() => setTimeout(() => setSearchFocused(false), 160)}
-                    placeholder="搜索历史事件，如：赤壁之战、丝绸之路..."
-                    className="min-w-0 flex-1 bg-transparent py-2 text-lg text-gray-900 placeholder:text-gray-400 focus:outline-none"
+                    placeholder="搜索历史事件，如：赤壁之战"
+                    className="min-w-0 flex-1 bg-transparent py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-lg"
                   />
                   <button
                     onClick={() => handleSearch()}
-                    className="shrink-0 rounded-2xl bg-gray-950 px-6 py-3 font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="shrink-0 rounded-2xl bg-gray-950 px-4 py-3 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 sm:px-6 sm:text-base"
                     disabled={!searchQuery.trim()}
                   >
                     开始聆听
@@ -301,9 +301,9 @@ export default function HomePage() {
           </div>
 
           {/* Global Ranking Section */}
-          <div className="mt-16 max-w-3xl mx-auto">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-8 text-center flex items-center justify-center gap-2">
-              <Trophy className="w-7 h-7 text-purple-600" />
+          <div className="mx-auto mt-12 max-w-3xl sm:mt-16">
+            <h2 className="mb-6 flex items-center justify-center gap-2 text-center text-[1.35rem] font-semibold text-gray-900 sm:mb-8 sm:text-2xl">
+              <Trophy className="h-6 w-6 text-purple-600 sm:h-7 sm:w-7" />
               <span>故事播放排行榜</span>
             </h2>
             <GlobalRanking ageGroup={ageGroup} />
@@ -441,16 +441,16 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-32 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
+      <section className="bg-gray-50 py-20 sm:py-32">
+        <div className="mx-auto max-w-6xl px-5 sm:px-6">
+          <h2 className="mb-4 text-center text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl">
             为什么选择历史故事会？
           </h2>
-          <p className="text-xl text-gray-600 text-center mb-20">
+          <p className="mb-12 text-center text-base text-gray-600 sm:mb-20 sm:text-xl">
             不是枯燥的教科书，不是浅薄的短视频
           </p>
 
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid gap-8 sm:gap-12 md:grid-cols-3">
             {features.map((feature, index) => (
               <div key={index} className="text-center">
                 <div className="text-6xl mb-6">{feature.icon}</div>
