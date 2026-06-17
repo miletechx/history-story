@@ -14,6 +14,7 @@ export async function synthesizeStoryAudio(text: string, ageGroup: unknown, requ
     speaker: voice.id,
     audioFormat: 'mp3',
     sampleRate: 24000,
+    speed: 0.85,
   });
 
   return {
