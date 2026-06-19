@@ -13,7 +13,7 @@ export default function RegisterPage() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
-	const [, setTurnstileToken] = useState('');
+	const [turnstileToken, setTurnstileToken] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 
@@ -37,13 +37,18 @@ export default function RegisterPage() {
 			return;
 		}
 
+		if (!turnstileToken) {
+			setError('请先完成人机验证');
+			return;
+		}
+
 		setLoading(true);
 
 		try {
 			const response = await fetch('/api/auth/register', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ username, password }),
+				body: JSON.stringify({ username, password, turnstileToken }),
 			});
 
 			const data = await response.json();

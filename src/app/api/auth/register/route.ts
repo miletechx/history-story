@@ -6,7 +6,28 @@ const SALT_ROUNDS = 10;
 
 export async function POST(request: NextRequest) {
 	try {
-		const { username, password } = await request.json();
+		const { turnstileToken, username, password } = await request.json();
+
+		const verifyResponse = await fetch(
+			'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					secret: process.env.TURNSTILE_SECRET_KEY,
+					response: turnstileToken,
+				}),
+			}
+		);
+
+		const verifyResult: { success?: boolean } = await verifyResponse.json();
+
+		if (!verifyResult.success) {
+			return NextResponse.json(
+				{ error: '人机验证失败，请重试' },
+				{ status: 403 }
+			);
+		}
 
 		// 验证输入
 		if (!username || !password) {
