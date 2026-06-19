@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Turnstile } from '@marsidev/react-turnstile';
 import { UserPlus, ArrowLeft } from 'lucide-react';
 
 export default function RegisterPage() {
@@ -12,6 +13,7 @@ export default function RegisterPage() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
+	const [, setTurnstileToken] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 
@@ -132,6 +134,13 @@ export default function RegisterPage() {
 								{error}
 							</div>
 						)}
+
+						<Turnstile
+							siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+							onSuccess={(token) => {
+								setTurnstileToken(token);
+							}}
+						/>
 
 						{/* 提交按钮 */}
 						<Button
